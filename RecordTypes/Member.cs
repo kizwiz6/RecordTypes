@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RecordTypes
 {
+    /// <summary>
+    /// Represent a member with basic information,
+    /// </summary>
     public class Member
     {
         public int Id { get; init; } // init-only setter
@@ -14,9 +17,9 @@ namespace RecordTypes
         public string Address { get; set; }
 
         /// <summary>
-        /// If we want to make properties immutable in the traditional way, we have to pass values in constructor like the below code.
+        /// Initialises a new instance of the <see cref="Member"/> class with the specified Id.
         /// </summary>
-        /// <param name="memberId">makes Id property Immutable</param>
+        /// <param name="memberId">The unique identifier of the member.</param>
         public Member(int memberId)
         {
             if (memberId <= 0)
@@ -25,32 +28,39 @@ namespace RecordTypes
             }
         }
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Member"/> class with the specified details.
+        /// </summary>
+        /// <param name="memberId">The unique identifier of the member.</param>
+        /// <param name="firstName">The first name of the member.</param>
+        /// <param name="lastName">The last name of the member.</param>
+        /// <param name="address">The address of the member.</param>
         public Member(int memberId, string firstName, string lastName, string address)
         {
-            if (memberId <= 0)
-            {
-                throw new ArgumentException("Member ID must be a positive integer.", nameof(memberId));
-            }
+            CheckArgument(memberId > 0, "Member ID must be a positive integer.", nameof(memberId));
+            CheckArgument(!string.IsNullOrWhiteSpace(firstName), "First name cannot be null or empty.", nameof(firstName));
+            CheckArgument(!string.IsNullOrWhiteSpace(lastName), "Last name cannot be null or empty.", nameof(lastName));
+            CheckArgument(!string.IsNullOrWhiteSpace(address), "Address cannot be null or empty.", nameof(address));
 
-            if(string.IsNullOrWhiteSpace(firstName))
-            {
-                throw new ArgumentException("First name cannot be null or empty.", nameof(firstName));
-            }
+            Id = memberId;
+            FirstName = firstName;
+            LastName = lastName;
+            Address = address;
+        }
 
-            if(string.IsNullOrWhiteSpace(lastName))
+        /// <summary>
+        /// Checks the specified condition and throws an <see cref="ArgumentException"/> if the condition is false.
+        /// </summary>
+        /// <param name="condition">The condition to check.</param>
+        /// <param name="message">The error message to include in the exception.</param>
+        /// <param name="paramName">The name of the parameter causing the exception.</param>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="condition"/> is false.</exception>
+        private static void CheckArgument(bool condition, string message, string paramName)
+        {
+            if (!condition)
             {
-                throw new ArgumentException("Last name cannot be null or empty.", nameof(firstName));
+                throw new ArgumentException(message, paramName);
             }
-
-            if (string.IsNullOrWhiteSpace(address))
-            {
-                throw new ArgumentException("Address cannot be null or empty.", nameof(address));
-            }
-
-            this.Id = memberId;
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Address = address;
         }
     }
 }
