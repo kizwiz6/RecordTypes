@@ -22,10 +22,16 @@ namespace RecordTypes
         /// <param name="memberId">The unique identifier of the member.</param>
         public Member(int memberId)
         {
+            // Old style of error handling logic
             if (memberId <= 0)
             {
                 Id = memberId;
             }
+        }
+
+        public Member()
+        {
+
         }
 
         /// <summary>

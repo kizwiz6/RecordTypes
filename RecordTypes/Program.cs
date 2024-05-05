@@ -6,7 +6,7 @@
         {
             while (true)
             {
-                Member memberObj = new Member(0, "", "Emery", "Cambridgeshire");
+                Member memberObj = new Member(1, "Kieran", "Emery", "Cambridgeshire");
 
                 Console.WriteLine("****************START - Member Details***********");
 
@@ -18,17 +18,33 @@
 
                 Console.WriteLine("****************END - Member Details***********");
 
+                var newMember = new Member
+                {
+                    Id = memberObj.Id,
+                    FirstName = memberObj.FirstName,
+                    LastName = memberObj.LastName,
+                    Address = "Bedfordshire"
+                };
+
+                if (!ExitConsoleApplication())
+                {
+                    break; // Exit the loop if the user presses 'Q'
+                }
+
+
             }
+        }
 
-
-
-            //var newMember = new Member
-            //{
-            //    Id = member.Id,
-            //    FirstName = member.FirstName,
-            //    LastName = member.LastName,
-            //    Address = "Mumbai"
-            //};
+        /// <summary>
+        /// Prompts the user to continue or exit the console application.
+        /// </summary>
+        /// <returns>True if the user wants to continue; otherwise, false.</returns>
+        private static bool ExitConsoleApplication()
+        {
+            // Ask the user if they want to continue
+            Console.WriteLine("Press 'Q' to quit or any other key to continue.");
+            var key = Console.ReadKey().Key;
+            return key != ConsoleKey.Q;
         }
     }
 }
