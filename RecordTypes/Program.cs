@@ -8,17 +8,17 @@
             {
                 Member memberObj = new Member(1, "Kieran", "Emery", "Cambridgeshire");
 
-                Console.WriteLine("****************START - Member Details***********");
+                Console.WriteLine("****************START - Member 1 Details***********");
 
                 Console.WriteLine("ID:- " + memberObj.Id);
                 Console.WriteLine("First Name:- " + memberObj.FirstName);
                 Console.WriteLine("Last Name:- " + memberObj.LastName);
                 Console.WriteLine("Address:- " + memberObj.Address);
+                Console.WriteLine("****************END - Member 1 Details***********");
                 Console.ReadLine();
+                Console.WriteLine("****************START - Member 1 Details UPDATED ***********");
 
-                Console.WriteLine("****************END - Member Details***********");
-
-                var newMember = new Member
+                var memberObj2 = new Member
                 {
                     Id = memberObj.Id,
                     FirstName = memberObj.FirstName,
@@ -26,11 +26,32 @@
                     Address = "Bedfordshire"
                 };
 
+                Console.WriteLine("ID:- " + memberObj2.Id);
+                Console.WriteLine("First Name:- " + memberObj2.FirstName);
+                Console.WriteLine("Last Name:- " + memberObj2.LastName);
+                Console.WriteLine("Address:- " + memberObj2.Address);
+                Console.WriteLine("****************END - Member 1 Details UPDATED ***********");
+                Console.ReadLine();
+                Console.WriteLine("****************START - Member 2 Details CREATED with RECORD ***********");
+
+                var memberObj3 = new MemberRecord(2, "Colin", "Emery", "Littlehampton");
+
+                // Creating a modified copy of memberObj3 with a different address
+                var updatedMemberObj3 = memberObj3 with { Address = "Oxfordshire" };
+
+                Console.WriteLine("ID:- " + updatedMemberObj3.Id);
+                Console.WriteLine("First Name:- " + updatedMemberObj3.FirstName);
+                Console.WriteLine("Last Name:- " + updatedMemberObj3.LastName);
+                Console.WriteLine("Address:- " + updatedMemberObj3.Address);
+                Console.WriteLine("****************END - Member 2 Details CREATED ***********");
+                Console.ReadLine();
+
+
+
                 if (!ExitConsoleApplication())
                 {
                     break; // Exit the loop if the user presses 'Q'
                 }
-
 
             }
         }
